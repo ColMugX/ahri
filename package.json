@@ -1,0 +1,21 @@
+{
+  "name": "ahri",
+  "version": "0.0.1",
+  "description": "vue and vuex based framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "vuex",
+    "ahri"
+  ],
+  "author": "ColMugX <colmugx@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^2.9.0"
+  },
+  "dependencies": {
+    "eslint": "^4.18.0"
+  }
+}
