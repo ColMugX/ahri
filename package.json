@@ -1,19 +1,15 @@
 {
-  "name": "ahri",
-  "version": "0.0.1",
-  "description": "vue and vuex based framework.",
-  "main": "index.js",
-  "scripts": {
-    "test": "test"
-  },
-  "keywords": [
-    "vuex",
-    "ahri"
-  ],
-  "author": "ColMugX <colmugx@gmail.com>",
-  "license": "MIT",
+  "private": true,
   "devDependencies": {
-    "lerna": "^2.9.0"
+    "babel-eslint": "^8.2.2",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-html": "^4.0.2",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "lerna": "^2.9.0",
+    "prettier": "^1.10.2"
   },
   "dependencies": {
     "eslint": "^4.18.0"
