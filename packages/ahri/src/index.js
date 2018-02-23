@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { isString } from './utils'
+import { isString, assert, isElement } from './utils'
 import checkRouter from './router'
 
 const render = (container, store, router) => {
@@ -27,12 +27,15 @@ export default function (opt = {}) {
     if (isString(container)) {
       container = document.querySelector(container)
     }
+    assert(isElement(container), `[Ahri] container should be HTMLElement`)
+    assert(app.router, `[Ahri] router must be registered before app.start()`)
 
     return render(container, store, app.router)
   }
 
   app.start = start
   app.router = router
+  app.use = Vue.use.bind(Vue)
 
   return app
 }
