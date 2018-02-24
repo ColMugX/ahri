@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import CreateAhri from './core'
 import { isString, assert, isElement } from './utils'
 import checkRouter from './router'
 
@@ -14,7 +15,7 @@ const render = (container, store, router) => {
 }
 
 export default function (opt = {}) {
-  const app = {}
+  const app = CreateAhri()
 
   const router = router => {
     Vue.use(Router)
@@ -30,6 +31,7 @@ export default function (opt = {}) {
     assert(isElement(container), `[Ahri] container should be HTMLElement`)
     assert(app.router, `[Ahri] router must be registered before app.start()`)
 
+    const store = app.store(app._model)
     return render(container, store, app.router)
   }
 
