@@ -1,6 +1,6 @@
 import { assert, isString, isObject, isFunction } from './utils'
 
-export default function switchModel (model) {
+export default function checkModel (model) {
   const {
     namespace,
     state,

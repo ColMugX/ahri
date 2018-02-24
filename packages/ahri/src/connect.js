@@ -9,6 +9,6 @@ const functional = (fn) => {
   })
 }
 
-export default {
+export {
   functional
 }
