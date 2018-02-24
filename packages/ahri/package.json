@@ -4,7 +4,7 @@
   "description": "vue and vuex based framework.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "keywords": [
     "vuex",
@@ -20,6 +20,11 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^22.1.3",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
     "jest": "^22.4.2",
     "vue": "^2.5.13"
   }
