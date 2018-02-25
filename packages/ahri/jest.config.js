@@ -1,9 +1,10 @@
 module.exports = {
-  'moduleFileExtensions': [
+  moduleFileExtensions: [
     'js'
   ],
-  'transform': {
+  transform: {
     '^.+\\.js$': 'babel-jest'
   },
-  'testMatch': ['<rootDir>/test/**/?(*.)(spec|test).js?(x)']
+  testMatch: ['<rootDir>/test/**/?(*.)(spec|test).js?(x)'],
+  bail: true
 }

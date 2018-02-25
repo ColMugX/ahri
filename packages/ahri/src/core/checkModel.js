@@ -50,6 +50,5 @@ export function mixModel (models) {
     const model = models[key]
     modules[model.name] = model.store
   }
-  console.log(modules)
   return modules
 }

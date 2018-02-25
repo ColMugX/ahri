@@ -20,7 +20,7 @@ export default function (opt = {}) {
   const router = router => {
     Vue.use(Router)
     router = checkRouter(router)
-    app.router = router
+    app._router = router
   }
 
   // 参考 dva 对节点的挂载方式
@@ -28,11 +28,11 @@ export default function (opt = {}) {
     if (isString(container)) {
       container = document.querySelector(container)
     }
-    assert(isElement(container), `[Ahri] container should be HTMLElement`)
-    assert(app.router, `[Ahri] router must be registered before app.start()`)
+    assert(!container || isElement(container), `[Ahri] container should be HTMLElement`)
+    assert(app._router, `[Ahri] router must be registered before app.start()`)
 
     const store = app.store(app._model)
-    return render(container, store, app.router)
+    return render(container, store, app._router)
   }
 
   app.start = start
