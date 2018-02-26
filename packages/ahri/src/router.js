@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router'
 import { assert, isString } from './utils'
 
-const lazyLoad = route => () => import(`@/routes/${route}`)
+const lazyLoad = route => resolve => require([`@/routes/${route}`], resolve)
 
 export default function (router = {}) {
   const _router = router
