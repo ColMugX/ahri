@@ -1,7 +1,8 @@
-
 language: node_js
 
 node_js:
   - "8"
 install: npm install
-script: npm test
+before_script:
+  - npm run bootstrap
+script: cd packages/ahri && npm test
