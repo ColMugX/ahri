@@ -14,6 +14,11 @@ const render = (container, store, router) => {
   return container ? app.$mount(container) : app
 }
 
+const withAjax = (container, store, router) => {
+  Vue.prototype.$ajax = require('axios')
+  return render(container, store, router)
+}
+
 export default function (opt = {}) {
   const app = CreateAhri()
 
@@ -32,7 +37,9 @@ export default function (opt = {}) {
     assert(app._router, `[Ahri] router must be registered before app.start()`)
 
     const store = app.store(app._model)
-    return render(container, store, app._router)
+    return opt.ajax
+      ? withAjax(container, store, app._router)
+      : render(container, store, app._router)
   }
 
   app.start = start

@@ -1,4 +1,4 @@
-import ahri from '../../src'
+import ahri from '../../index'
 import Vue from 'vue'
 
 const testCom = Vue.component('testCom', {

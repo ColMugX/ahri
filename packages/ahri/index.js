@@ -1,2 +1,6 @@
-export { default as connect } from './src/connect'
-export { default } from './src'
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+module.exports = require("./lib");
+exports.connect = require("./lib/connect");

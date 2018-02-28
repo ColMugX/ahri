@@ -1,4 +1,4 @@
-import checkModel from '../../src/core/checkModel'
+import checkModel from '../../lib/core/checkModel'
 
 const model = {
   namespace: 'test',
