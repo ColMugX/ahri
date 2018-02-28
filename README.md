@@ -1,2 +1,2 @@
 # ahri
-ahri == fox girl.
+纸糊的轮子，经不起乱搞

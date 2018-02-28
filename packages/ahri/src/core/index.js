@@ -28,7 +28,8 @@ export default function (opt = {}) {
 
   const store = (models, plugin) => createStore({
     modules: mixModel(models),
-    plugin
+    plugin,
+    ...opt
   })
 
   const app = {

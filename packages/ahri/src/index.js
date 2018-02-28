@@ -20,7 +20,8 @@ const withAjax = (container, store, router) => {
 }
 
 export default function (opt = {}) {
-  const app = CreateAhri()
+  const vuexConf = opt.vuex ? opt.vuex : {}
+  const app = CreateAhri(vuexConf)
 
   const router = router => {
     Vue.use(Router)
