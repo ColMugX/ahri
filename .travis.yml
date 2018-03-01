@@ -5,7 +5,7 @@ node_js:
 
 before_install: cd packages/ahri
 install: npm install
-script: npm run build
+script: npm run build && npm test
 # before_script:
 #   - npm run bootstrap
 notifications:

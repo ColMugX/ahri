@@ -9,7 +9,7 @@ const initModel = {
   },
   mutations: {
     update (state) {
-      return state.count += 1
+      state.count += 1
     }
   }
 }
@@ -24,11 +24,10 @@ export default function (opt = {}) {
     checkModel(initModel)
   ]
 
-  const model = model => _model.push(checkModel(model))
+  const model = model => _model.push(checkModel(model, app._model))
 
-  const store = (models, plugin) => createStore({
+  const store = (models) => createStore({
     modules: mixModel(models),
-    plugin,
     ...opt
   })
 

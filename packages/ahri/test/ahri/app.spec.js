@@ -48,4 +48,16 @@ describe('app test', () => {
     const state = contain.$store.state['@@ahri']
     expect(state.count).toBe(1)
   })
+
+  it('vuex config', () => {
+    const app = ahri({
+      vuex: {
+        strict: true
+      }
+    })
+    app.model(model)
+    app.router(router)
+    const contain = app.start()
+    expect(contain.$store.strict).toBe(true)
+  })
 })
