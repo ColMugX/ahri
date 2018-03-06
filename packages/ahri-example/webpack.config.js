@@ -15,11 +15,15 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: 'css-loader'
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /\.styl$/,
         use: [
+          'vue-style-loader',
           'css-loader',
           'stylus-loader'
         ]
@@ -30,6 +34,7 @@ module.exports = {
         options: {
           loaders: {
             'stylus': [
+              'vue-style-loader',
               'css-loader',
               'stylus-loader'
             ]
@@ -56,7 +61,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
     progress: true
   },
   resolve: {
