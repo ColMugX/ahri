@@ -17,10 +17,7 @@ const model = {
 
 const router = {
   routes:[
-    {
-      path: '/',
-      component: testCom
-    }
+    { path: '/', component: testCom }
   ]
 }
 
