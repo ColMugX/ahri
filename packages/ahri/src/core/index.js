@@ -14,9 +14,10 @@ const initModel = {
   }
 }
 
-const createStore = config => {
+const createStore = (app, config) => {
   Vue.use(Vuex)
-  return new Vuex.Store(config)
+  app._store = new Vuex.Store(config)
+  return app._store
 }
 
 export default function (opt = {}) {
@@ -26,7 +27,7 @@ export default function (opt = {}) {
 
   const model = model => _model.push(checkModel(model, app._model))
 
-  const store = (models) => createStore({
+  const store = (models) => createStore(app, {
     modules: mixModel(models),
     ...opt
   })

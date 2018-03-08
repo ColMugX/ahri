@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { assert, isString, isObject, isFunction } from './utils'
 
 export default function checkModel (model, existModels = []) {
@@ -59,7 +60,7 @@ export function mixModel (models) {
   for (const key in models) {
     const model = models[key]
     if (model.name === 'GlobalApp') {
-      ga = deepMerge(ga, model.store)
+      ga = _.merge(ga, model.store)
       continue
     }
     modules[model.name] = model.store
