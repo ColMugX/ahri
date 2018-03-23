@@ -3,34 +3,34 @@ import Router from 'vue-router'
 import CreateAhri from './core'
 import { isString, assert, isElement } from './utils'
 import checkRouter from './router'
+import serverRender from './serverRender'
 
-const render = (container, store, router) => {
+const render = (container, store, router, ssr) => {
   const app = new Vue({
     store,
     router,
     render: h => h('div', { attrs: { id: 'app' } }, [h('router-view')])
   })
-
-  return container ? app.$mount(container) : app
-}
-
-const withAjax = (container, store, router) => {
-  Vue.prototype.$ajax = require('axios')
-  return render(container, store, router)
+  return ssr
+    ? serverRender(app)
+    : container ? app.$mount(container) : app
 }
 
 export default function (opt = {}) {
-  const vuexConf = opt.vuex ? opt.vuex : {}
+  const vuexConf = opt.vuex || {}
+  const { ssr = false, ajax = false } = opt
   const app = CreateAhri(vuexConf)
 
   const router = router => {
     Vue.use(Router)
     router = checkRouter(router)
     app._router = router
+    return router
   }
 
   // 参考 dva 对节点的挂载方式
   const start = container => {
+    if (ajax) Vue.prototype.$ajax = require('axios')
     if (isString(container)) {
       container = document.querySelector(container)
     }
@@ -38,9 +38,7 @@ export default function (opt = {}) {
     assert(app._router, `[Ahri] router must be registered before app.start()`)
 
     const store = app.store(app._model)
-    return opt.ajax
-      ? withAjax(container, store, app._router)
-      : render(container, store, app._router)
+    return render(container, store, app._router, ssr)
   }
 
   app.start = start
