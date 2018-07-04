@@ -16,6 +16,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
+    "ahri": "file:../ahri",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
