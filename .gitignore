@@ -4,3 +4,4 @@ npm-debug.log*
 .tern-port
 package-lock.json
 lib/
+ahri-old

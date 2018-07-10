@@ -1,70 +1,81 @@
 import _ from 'lodash'
-import { assert, isString, isObject, isFunction } from './utils'
+import {
+  assert,
+  isString,
+  isFunction
+} from '../utils'
 
-export default function checkModel (model, existModels = []) {
+const RESERVENAME = 'ahri'
+/**
+ *
+ * @param {object} model
+ * @param {object} prevModel
+ */
+export default function checkModel (model, prevModel) {
+  prevModel = prevModel || []
   const {
     namespace,
     state,
-    getter,
-    mutations,
-    actions,
-    subscriptions
+    subscriptions,
+    ...other
   } = model
-  const out = {}
-  const store = out.store = {}
+  let newModel = {}
+  const store = {}
 
-  assert(state, `state not found!`)
-  assert(mutations, `mutations not found!`)
-  assert(isObject(mutations), `mutations should be object, but got ${typeof mutations}`)
+  // 数据默认不归类，进默认module
+  newModel.name = RESERVENAME
 
-  if (namespace && isString(namespace)) {
-    assert(namespace !== 'GlobalApp', `namespace should not be 'GlobalApp'`)
-    assert(!existModels.some(model => model.name === namespace), `namespace should be unique`)
+  // state 必须(最好)存在
+  assert(state, `[Ahri model] namespace should be defined`)
+  store.state = state
+
+  if (namespace) {
+    // 如果有 namespace 必须是字符串
+    assert(isString(namespace), `[Ahri model] namespace should be string, but got ${typeof namespace}`)
+    // 其次不能重复
+    assert(!prevModel.some(model => model.name === namespace), `namespace should be unique`)
+    // 不能与默认 module 重名
+    assert(namespace !== RESERVENAME, `namespace should not be ${RESERVENAME}`)
+
     store.namespaced = true
-    out.name = namespace
-  } else {
-    out.name = 'GlobalApp'
+    newModel.name = namespace
   }
 
-  if (actions) {
-    assert(actions, `actions should be object, but got ${typeof actions}`)
-  }
-
+  // 订阅(vue-router)，并不是本次该关心的点
   if (subscriptions) {
     assert(
       Object.keys(subscriptions).every(key => isFunction(subscriptions[key])),
       `subscription should be function`
     )
   }
+  store.subscriptions = subscriptions
 
-  store.state = state
-  store.mutations = mutations
-  store.actions = actions
-  store.getter = getter || {}
-
-  return out
+  newModel = {
+    ...newModel,
+    store: {
+      ...store,
+      ...other
+    }
+  }
+  return newModel
 }
 
+/**
+ * mix models output vuex configure.
+ * @param {array} models
+ */
 export function mixModel (models) {
   const modules = {}
   let ga = {}
-  const deepMerge = (o1, o2) => {
-    for (const k in o2) {
-      o1[k] = o1[k] && o1[k].toString() === '[object Object]'
-        ? deepMerge(o1[k], o2[k])
-        : o1[k] = o2[k]
-    }
-    return o1
-  }
 
   for (const key in models) {
     const model = models[key]
-    if (model.name === 'GlobalApp') {
+    if (model.name === RESERVENAME) {
       ga = _.merge(ga, model.store)
-      continue
+    } else {
+      modules[model.name] = model.store
     }
-    modules[model.name] = model.store
   }
-  modules['GlobalApp'] = ga
+  modules[RESERVENAME] = ga
   return modules
 }

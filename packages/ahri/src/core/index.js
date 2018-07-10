@@ -2,40 +2,30 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import checkModel, { mixModel } from './checkModel'
 
-const initModel = {
-  namespace: '@@ahri',
-  state: {
-    count: 0
-  },
-  mutations: {
-    update (state) {
-      state.count += 1
-    }
-  }
-}
-
-const createStore = (app, config) => {
-  Vue.use(Vuex)
-  app._store = new Vuex.Store(config)
-  return app._store
-}
-
-export default function (opt = {}) {
-  const _model = [
-    checkModel(initModel)
-  ]
+/**
+ * 创建封装过的 vuex
+ * @param {*} opt
+ */
+export default function create (opt) {
+  opt = opt || {}
+  const _model = []
 
   const model = model => _model.push(checkModel(model, app._model))
 
-  const store = (models) => createStore(app, {
-    modules: mixModel(models),
+  const store = () => createStore({
+    modules: mixModel(_model),
     ...opt
   })
 
   const app = {
-    _model,
     model,
     store
   }
   return app
+
+  function createStore (opt) {
+    Vue.use(Vuex)
+    app._store = new Vuex.Store(opt)
+    return app._stoer
+  }
 }

@@ -1,4 +1,4 @@
 packages/ahri-example
-packages/ahri/test
-packages/ahri/lib
 packages/ahri/index.js
+lib
+test
