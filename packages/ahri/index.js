@@ -1,3 +1,3 @@
 "use strict";
-module.exports = require('./src');
-module.exports.connect = require('./src/connect');
+module.exports = require('./lib');
+module.exports.connect = require('./lib/connect');
