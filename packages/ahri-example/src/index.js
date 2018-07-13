@@ -1,10 +1,15 @@
 import ahri from 'ahri'
 
 // 1. Initialize
-const app = ahri()
+const app = ahri({
+  router: {
+    mode: 'history'
+  }
+})
 
 // 2. Model
-app.model(require('./models/index'))
+app.model(require('./models/index').default)
+app.model(require('./models/example').default)
 
 // 3. Router
 app.router(require('./router').default)

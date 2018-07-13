@@ -1,4 +1,5 @@
 export default {
+  namespace: 'example',
   state: {
     count: 0,
   },

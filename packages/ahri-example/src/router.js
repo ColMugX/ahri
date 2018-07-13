@@ -1,9 +1,6 @@
-export default {
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      component: 'Welcome'
-    }
-  ]
-}
+export default [
+  {
+    path: '/',
+    component: 'Welcome'
+  }
+]
